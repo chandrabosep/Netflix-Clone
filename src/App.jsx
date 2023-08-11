@@ -4,7 +4,6 @@ import HomeScreen from './Pages/HomeScreen'
 import request from './request'
 
 const App = () => {
-  const baseURL = 'https://api.themoviedb.org/3';
   return (
     <>
       <HomeScreen/>
