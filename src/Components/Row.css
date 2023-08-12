@@ -1,0 +1,12 @@
+/* For webkit-based browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 0.25rem; /* Adjust this width as needed */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
