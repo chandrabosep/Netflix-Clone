@@ -23,16 +23,16 @@ const Row = ({title,fetchUrl,isLargeRow=false}) => {
 
 
   return (
-    <div className='px-1.5'>
-      <h2 className='font-medium text-white text-3xl'> {title}</h2>
-      <div className='flex overflow-y-hidden overflow-x-scroll scrollBar p-[20px]'>
+    <div className=''>
+      <h2 className='font-medium text-white text-xl md:text-3xl'> {title}</h2>
+      <div className={`flex overflow-x-scroll  row_scroll py-[25px] pl-[5px] md:py-[30px] md:pl-[10px] md:pr-[20px]`}>
         {movies.map((x) =>(
             <img src={`${imgURL}${
-                isLargeRow ? x.poster_path:x.backdrop_path
-            }`} className='w-5/12 md:w-[12.5%] pr-2' alt={movies.name}/>
+                isLargeRow?x.poster_path:x.backdrop_path
+            }`} className={`w-5/12 ease-in-out duration-300 rounded-sm mr-3 hover:scale-[1.1] ${ isLargeRow?'':'mr-2'}
+            md:w-[12%]`} alt={movies.name}/>
         ))}
       </div>
-
     </div>
   )
 }

@@ -1,12 +1,26 @@
 /* For webkit-based browsers (Chrome, Safari) */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 0.25rem; /* Adjust this width as needed */
-}
 
-::-webkit-scrollbar-thumb {
+
+/* ::-webkit-scrollbar-thumb {
   background-color: transparent;
 }
 
 ::-webkit-scrollbar-track {
   background-color: transparent;
+}  */
+
+
+/* .row_scroll::-webkit-scrollbar{
+  display: none;
+} */
+.row_scroll {
+  display: flex;
+  overflow-x: hidden; /* Hide the standard scrollbar */
+}
+
+
+.row_scroll::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Opera: hide the scrollbar */
 }
