@@ -56,7 +56,7 @@ const Banner = () => {
         }
             
       </div>
-      {/* <div className='absolute inset-x-0 bottom-0 bg-gradient-to-t from-black to-transparent opacity-100 h-1/6'></div> */}
+      <div className='absolute inset-x-0 bottom-0 bg-gradient-to-t from-black to-transparent opacity-100 h-[20%]'></div>
       
       </header>
 
