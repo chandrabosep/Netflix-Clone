@@ -39,7 +39,7 @@ const Banner = () => {
         
         </div>
         <div className='flex justify-center md:top-6 md:justify-normal md:gap-4 py-4'>
-            <button className={`px-10 py-2  ${sm?`bg-[#e8e8e8]`:"bg-[rgba(51,51,51)] text-white"} bg-opacity-95 rounded text-lg text-black font-medium flex items-center gap-2.5`}>
+            <button className={`px-10 py-2  ${sm?`bg-[#e8e8e8]`:"bg-[#2c2c2c] text-white"} bg-opacity-95 rounded md:hover:bg-[#e3e3e3] md:hover:text-black text-lg text-black font-medium flex items-center gap-2.5`}>
               <span>
                 <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.5 0.200012L13.5 8.00001L0.5 15.8V0.200012Z" fill={sm?`black`:`white`}/>
@@ -47,7 +47,7 @@ const Banner = () => {
               </span>
               Play</button>
             {sm?"":
-            <button className={`px-10 py-2 ${sm?`bg-[#e8e8e8]`:"bg-[rgba(51,51,51)] text-white"} text-lg font-medium flex items-center gap-2 rounded`}><img src={plus} className='w-6' alt="" />My List</button>}
+            <button className={`px-10 py-2 ${sm?`bg-[#e8e8e8]`:"bg-[#2c2c2c] md:hover:bg-[#e3e3e3] md:hover:text-black text-white"} text-lg font-medium flex items-center gap-2 rounded`}><img src={plus} className='w-6' alt="" />My List</button>}
         </div> 
         {sm?"":<p className='w-11/12 text-lg md:line-clamp-3 contents'>
           {movie?.overview}
