@@ -30,7 +30,7 @@ const Row = ({title,fetchUrl,isLargeRow=false}) => {
             <img src={`${imgURL}${
                 isLargeRow?x.poster_path:x.backdrop_path
             }`} key={movies.id}
-            className={`w-5/12 ease-in-out duration-500 flex-row rounded-sm mr-2 ${ isLargeRow?'hover:scale-[1.2]':'mr-2  hover:scale-[1.4] '}
+            className={`w-5/12 ease-in-out duration-500 flex-row rounded-sm mr-2 ${ isLargeRow?'md:hover:scale-[1.2]':'mr-2  md:hover:scale-[1.4] '}
             md:w-[12%]`} alt={movies.name}/>
         ))}
       </div>
