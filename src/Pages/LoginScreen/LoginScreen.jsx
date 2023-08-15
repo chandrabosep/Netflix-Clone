@@ -24,7 +24,7 @@ const LoginScreen = () => {
               <h3 className='text-sm w-[90%] ml-auto mr-auto md:text-xl font-sm'>Ready to watch? Enter your email to create or restart your membership.</h3>
               <div className='w-[80%] ml-auto mr-auto'>
                 <form className='py-5'>
-                  <input type="email" placeholder='Email Address' className='w-[90%] mb-4 md:w-[28%] py-3 px-3 rounded-l-sm'/>
+                  <input type="email" placeholder='Email Address' className='text-black w-[90%] mb-4 md:w-[28%] py-3 px-3 rounded-l-sm'/>
                   <button onClick={()=>setSignIn(true)} className='bg-[#e50914f3] py-3 px-6 w-[90%] md:w-fit rounded-r-sm font-medium'>GET STARTED</button>
                 </form>
               </div>
