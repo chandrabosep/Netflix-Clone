@@ -31,7 +31,6 @@
       }) 
       return unsubscribe;
     },[])
-    console.log(contextUser)
 
     return (
       <userContext.Provider value={{contextUser}}>
