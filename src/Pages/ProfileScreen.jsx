@@ -1,12 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Navbar from '../Components/Navbar'
 import user from '../Assets/user3.svg'
 import { userContext } from '../App'
 import Plans from '../Components/Plans'
+import { getAuth } from 'firebase/auth'
+import { firebaseApp } from '../firebase'
 
 const ProfileScreen = () => {
     const {contextUser} = useContext(userContext);
-    
+    const auth = getAuth(firebaseApp);
 
   return (
     <div className='w-full h-screen bg-black'>
