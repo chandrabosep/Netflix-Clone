@@ -18,19 +18,26 @@
     useEffect(()=>{
 
       //firebase automatically stores the details in local memory
-      const unsubscribe = onAuthStateChanged(auth,userAuth=>{
-        if(userAuth){
-          setContextUser({
-            uid:userAuth.uid,
-            email:userAuth.email
-          })
+      const unsubscribe = onAuthStateChanged(auth,(userAuth)=>{
+        try{
+          if(userAuth){
+            setContextUser({
+              uid:userAuth.uid,
+              email:userAuth.email
+            })
+          }
+          else{
+            setContextUser(null)
+          }
+          console.log("user auth",userAuth)
         }
-        else{
-          setContextUser(null)
+        catch(e){
+          console.log("Error updating contextUser:",e)
         }
       }) 
       return unsubscribe;
     },[])
+    console.log("context user",contextUser)
 
     return (
       <userContext.Provider value={{contextUser}}>

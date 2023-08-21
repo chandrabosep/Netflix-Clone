@@ -14,23 +14,25 @@ import { userContext } from '../App';
 import { loadStripe } from '@stripe/stripe-js';
 
 const Plans = () => {
-  const contextUser = useContext(userContext);
+  const {contextUser} = useContext(userContext);
+  console.log("user id",contextUser.uid)
+  
   const db = getFirestore(firebaseApp);
   const [plans, setPlans] = useState([]);
-  const [pushSubscription, setSubscription] = useState([]);
+  const [pushSubscription, setSubscription] = useState(null);
 
   useEffect(() => {
     const fetchSubscriptions = async () => {
       const userSubscriptionsRef = collection(
-        doc(db, 'customers', contextUser.uid),
-        'subscriptions'
+        db,
+        `customers/${contextUser.uid}/subscriptions`
       );
-  
+    
       try {
+        // Use `getDocs` to fetch subscriptions
         const querySnapshot = await getDocs(userSubscriptionsRef);
-  
         const subscriptionsData = [];
-  
+      
         querySnapshot.forEach(subscriptionDoc => {
           const subscriptionData = subscriptionDoc.data();
           subscriptionsData.push({
@@ -39,52 +41,54 @@ const Plans = () => {
             current_period_start: subscriptionData.current_period_start.seconds,
           });
         });
-  
-        console.log(subscriptionsData); // Check the retrieved data
-  
-        setSubscription(subscriptionsData); // Set the subscriptions data
+      
+        console.log('Subscriptions:', subscriptionsData);
+      
+        setSubscription(subscriptionsData);
       } catch (error) {
         console.error('Error fetching subscriptions:', error);
       }
     };
+    
   
     fetchSubscriptions();
   }, [contextUser.uid]);
   
-
   
-
   useEffect(() => {
     const fetchPlans = async () => {
       const q = query(collection(db, 'products'), where('active', '==', true));
       const querySnapshot = await getDocs(q);
-
+  
       const plansData = {};
-
+  
       for (const productDoc of querySnapshot.docs) {
         const productData = productDoc.data();
-
+  
         plansData[productDoc.id] = productData;
-
+  
         const priceSnap = await getDocs(collection(productDoc.ref, 'prices'));
-
+  
         plansData[productDoc.id].prices = priceSnap.docs.map((price) => ({
           priceId: price.id,
           priceData: price.data(),
         }));
       }
-
+  
+      console.log('Plans:', plansData); // Check the retrieved plans data
+  
       setPlans(plansData);
     };
-
+  
     fetchPlans();
   }, []);
 
+  
+
   const loadCheckout = async (priceId) => {
-    console.log('contextUser.uid:', contextUser.contextUser.uid); // Debugging log
 
     const userCheckoutSessionsRef = collection(
-      doc(db, 'customers', contextUser.contextUser.uid),
+      doc(db, 'customers', contextUser.uid),
       'checkout_sessions'
     );
 
@@ -109,8 +113,9 @@ const Plans = () => {
   return (
     <div>
       {Object.entries(plans).map(([id, e]) => {
-        const pushSubscriptionForPlan = pushSubscription.find(sub => sub.role === e.name);
-        const isCurrentPackage = pushSubscriptionForPlan && e.name?.toLowerCase().includes(pushSubscriptionForPlan.role);
+      const pushSubscriptionForPlan = pushSubscription && pushSubscription.find(sub => sub.role === e.name);
+      const isCurrentPackage = pushSubscriptionForPlan && e.name?.toLowerCase().includes(pushSubscriptionForPlan.role);
+  
         return (
           <div key={id} className='flex items-center justify-between'>
             <div className='py-4'>
@@ -121,13 +126,14 @@ const Plans = () => {
               onClick={() => !isCurrentPackage && loadCheckout(e.prices[0].priceId)}
               className='py-1 md:my-6 px-[4%] rounded-sm cursor-pointer bg-[#e50914f3]'
             >
-              {isCurrentPackage ? 'current package' : 'Subscribe'}
+              {isCurrentPackage ? 'Current Package' : 'Subscribe'}
             </button>
           </div>
         );
       })}
     </div>
   );
+  
 };
 
 export default Plans;
